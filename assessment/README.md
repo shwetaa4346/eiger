@@ -8,11 +8,9 @@ The assessment covers M1-M8 and the Capstone, focusing on practical AI security 
 
 ## Assessment Report
 
-The complete assessment report is available here:
+[Open Technical Assessment Report](./Technical_Assessment_Report.pdf)
 
-- Technical_Assessment_Report.pdf
-
-The report contains the methodology, vulnerability analysis, reproduction steps, observed results, impact, mitigations, validation results, and evidence references.
+The complete assessment report contains the methodology, vulnerability analysis, reproduction steps, observed results, impact, mitigations, validation results, and evidence references.
 
 ## Evidence
 
@@ -29,15 +27,11 @@ Individual evidence screenshots are organized module-wise:
 
 ## External Evidence
 
-Complete evidence repository:
-
-See GOOGLE_DRIVE_EVIDENCE_LINK.txt
+[Open Complete Google Drive Evidence Repository](https://drive.google.com/drive/folders/1jklE80wwego3JTPkRowoAz1pz07GtHVM?usp=sharing)
 
 ## Final Assessment Video
 
-Final assessment recording:
-
-See FINAL_VIDEO_LINK.txt
+[Watch Final Assessment Video](https://drive.google.com/file/d/1KAAqTJ8lIwTWOSQazY68yg039MCa-H87/view?usp=sharing)
 
 ## Capstone
 
