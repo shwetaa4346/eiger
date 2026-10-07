@@ -2,6 +2,67 @@
 
 [![CI](https://github.com/kkmookhey/eiger/actions/workflows/ci.yml/badge.svg)](https://github.com/kkmookhey/eiger/actions/workflows/ci.yml)
 
+# Eiger Security Assessment — Network Intelligence Technical Screen
+
+**Candidate:** Shweta Tambe  
+**Assessment:** Eiger Technical Screen  
+**Organization:** Network Intelligence
+
+## Candidate Submission
+
+This repository contains my completed technical assessment for Network Intelligence's Eiger security exercise.
+
+The assessment focuses on:
+
+- Identification and exploitation of a security vulnerability in the Eiger lab
+- Validation of the vulnerability using the provided `/validate/` mechanism
+- Implementation of a security fix
+- Re-validation of the same attack after applying the fix
+- Analysis of the scope and limitations of the implemented fix
+
+### Assessment Layer
+
+**Layer:** [ENTER YOUR LAYER — e.g. RAG / Agent / MCP]
+
+### Vulnerability
+
+**Vulnerability:** [ENTER THE EXACT VULNERABILITY YOU TESTED]
+
+### Submission Contents
+
+| Item | Location |
+|---|---|
+| Technical write-up | `report/` |
+| Before-fix validation | `evidence/` |
+| After-fix validation | `evidence/` |
+| Modified files | Repository source files |
+| Demo video | [PASTE YOUTUBE LINK] |
+
+### Validation Summary
+
+| State | Result |
+|---|---|
+| Before security fix | ✅ Attack succeeded |
+| After security fix | ❌ Attack failed |
+
+### Fix Summary
+
+[WRITE 2–4 SENTENCES EXPLAINING WHAT YOU CHANGED AND WHY.]
+
+### Fix Limitations
+
+[WRITE WHAT YOUR FIX DOES NOT COVER.]
+
+### AI Usage
+
+AI tools were used during the assessment to assist with understanding unfamiliar components, exploring attack and mitigation approaches, troubleshooting implementation issues, and refining the solution. The final implementation was independently tested and verified using the provided validation mechanism.
+
+---
+
+# Original Eiger Documentation
+
+The original Eiger teaching-lab documentation follows below.
+
 **Eiger** is a deliberately vulnerable, single-app teaching lab for an instructor-led course on adversarial AI. One fictional AI-first neobank ("Eiger") and its assistant ("Iggy") are attacked across six layers that grow module by module:
 
 ```
