@@ -8,9 +8,15 @@ The assessment covers M1-M8 and the Capstone, focusing on practical AI security 
 
 ## Assessment Report
 
-[Open Technical Assessment Report](./Technical_Assessment_Report.pdf)
+[?? Open Technical Assessment Report](./Technical_Assessment_Report.pdf)
 
-The complete assessment report contains the methodology, vulnerability analysis, reproduction steps, observed results, impact, mitigations, validation results, and evidence references.
+## Complete Evidence Repository
+
+[?? Open Google Drive Evidence Folder](https://drive.google.com/drive/folders/1jklE80wwego3JTPkRowoAz1pz07GtHVM?usp=sharing)
+
+## Final Assessment Video
+
+[?? Watch Final Assessment Video](https://drive.google.com/file/d/1KAAqTJ8lIwTWOSQazY68yg039MCa-H87/view?usp=sharing)
 
 ## Evidence
 
@@ -24,14 +30,6 @@ Individual evidence screenshots are organized module-wise:
 - M6 - MCP Tool Poisoning
 - M7 - Multi-Agent Trust
 - M8 - Guardrail Bypass
-
-## External Evidence
-
-[Open Complete Google Drive Evidence Repository](https://drive.google.com/drive/folders/1jklE80wwego3JTPkRowoAz1pz07GtHVM?usp=sharing)
-
-## Final Assessment Video
-
-[Watch Final Assessment Video](https://drive.google.com/file/d/1KAAqTJ8lIwTWOSQazY68yg039MCa-H87/view?usp=sharing)
 
 ## Capstone
 
