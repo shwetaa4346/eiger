@@ -8,73 +8,206 @@
 **Assessment:** Eiger Technical Screen  
 **Organization:** Network Intelligence
 
+---
+
 ## Candidate Submission
 
-This repository contains my completed technical assessment for Network Intelligence's Eiger security exercise.
+This repository contains my completed technical assessment for the Network Intelligence Eiger security exercise.
 
-The assessment focuses on:
+The assessment was performed in the authorized Eiger AI Security Lab environment. The work focused on identifying and reproducing a security weakness, implementing a security control, and validating the behavior before and after remediation.
 
-- Identification and exploitation of a security vulnerability in the Eiger lab
-- Validation of the vulnerability using the provided `/validate/` mechanism
-- Implementation of a security fix
-- Re-validation of the same attack after applying the fix
-- Analysis of the scope and limitations of the implemented fix
+### Primary Assessment Focus
 
-### Assessment Layer
+**Layer:** M5 – Agent / Excessive Agency  
+**Vulnerability:** Excessive Agency / Broken Tool Authorization
 
-**Layer:** [ENTER YOUR LAYER — e.g. RAG / Agent / MCP]
+The assessment demonstrates how an AI agent can perform a high-impact action when application-level authorization does not independently verify whether the requested action is permitted.
 
-### Vulnerability
-
-**Vulnerability:** [ENTER THE EXACT VULNERABILITY YOU TESTED]
-
-### Submission Contents
-
-| Item | Location |
-|---|---|
-| Technical write-up | `report/` |
-| Before-fix validation | `evidence/` |
-| After-fix validation | `evidence/` |
-| Modified files | Repository source files |
-| Demo video | [PASTE YOUTUBE LINK] |
-
-### Validation Summary
-
-| State | Result |
-|---|---|
-| Before security fix | ✅ Attack succeeded |
-| After security fix | ❌ Attack failed |
-
-### Fix Summary
-
-[WRITE 2–4 SENTENCES EXPLAINING WHAT YOU CHANGED AND WHY.]
-
-### Fix Limitations
-
-[WRITE WHAT YOUR FIX DOES NOT COVER.]
-
-### AI Usage
-
-AI tools were used during the assessment to assist with understanding unfamiliar components, exploring attack and mitigation approaches, troubleshooting implementation issues, and refining the solution. The final implementation was independently tested and verified using the provided validation mechanism.
+The specific scenario involved attempting to move funds to an account that was not owned by the current user.
 
 ---
 
-# Original Eiger Documentation
+## Vulnerability Summary
 
-The original Eiger teaching-lab documentation follows below.
+In the vulnerable implementation, tool authorization could be bypassed when tool-scope enforcement was disabled.
 
-**Eiger** is a deliberately vulnerable, single-app teaching lab for an instructor-led course on adversarial AI. One fictional AI-first neobank ("Eiger") and its assistant ("Iggy") are attacked across six layers that grow module by module:
+The vulnerable authorization logic allowed tool calls without independently verifying whether the target account belonged to the current session.
 
-```
-L0 chatbot → L1 RAG → L2 agent → L3 MCP servers → L4 multi-agent → L5 production
-```
+This creates a security boundary failure because:
 
-Participants **Build / Break / Secure** each layer. Named for the Eiger's north face — the hard, exposed climb.
+> An AI agent deciding to call a tool is not equivalent to the user being authorized to perform the action.
 
-![Eiger learner interface](docs/assets/eiger-readiness.jpg)
+If an AI agent is given access to sensitive financial tools, relying on the model to make the authorization decision can result in unauthorized transactions or other high-impact actions.
 
 ---
 
+## Attack Demonstration
+
+The attack was performed against the vulnerable M5 implementation.
+
+The test flow was:
+
+1. Open the M5 – Excessive Agency exercise.
+2. Reset the test accounts.
+3. Identify the account belonging to the current session.
+4. Use the AI agent to request a transfer to an account not owned by the current user.
+5. Observe the generated tool call.
+6. Verify the behavior of the vulnerable authorization logic.
+7. Validate the result using the Eiger validation mechanism.
+
+The vulnerable behavior demonstrated that the agent could use application privileges to perform an action outside the user's ownership boundary.
+
+---
+
+## Security Fix
+
+The authorization logic was hardened by introducing deterministic ownership checks before sensitive tool actions are permitted.
+
+For money-moving operations, the application verifies whether the destination account belongs to the current session before allowing the action.
+
+The same authorization principle was applied to sensitive account operations such as account email changes.
+
+The resulting security boundary is:
+
+```text
+User Request
+     ↓
+AI Agent
+     ↓
+Tool Selection
+     ↓
+Tool Arguments
+     ↓
+Deterministic Authorization
+     ↓
+Ownership Check
+     ↓
+Sensitive Action
+```
+
+---
+
+## Validation
+
+The same attack scenario was tested before and after the security control was applied.
+
+| Test State | Result |
+|---|---|
+| Vulnerable implementation | Attack succeeded |
+| Hardened implementation | Unauthorized action was blocked |
+| Validation mechanism | Eiger validation mechanism |
+
+Supporting before/after screenshots, recordings, and validation evidence are included in the assessment report and repository evidence.
+
+---
+
+## Impact
+
+Excessive agency and broken tool authorization can allow an AI agent to misuse legitimate application privileges.
+
+Potential impacts include:
+
+- Unauthorized financial transfers
+- Unauthorized account changes
+- Cross-account actions
+- Privilege abuse
+- Data modification
+- Financial loss
+- Confused-deputy attacks
+
+The risk is particularly significant when AI agents are connected to tools capable of performing irreversible or high-impact operations.
+
+---
+
+## What the Fix Covers
+
+The implemented authorization control ensures that sensitive actions are checked against the current user's ownership boundary before execution.
+
+It specifically addresses the identified authorization weakness in the Eiger M5 exercise by preventing the agent from performing protected actions against resources that do not belong to the current session.
+
+---
+
+## What the Fix Does Not Cover
+
+The implemented fix addresses the identified tool-authorization and ownership-checking weakness. It should not be considered a complete security solution for an AI agent or financial application.
+
+Additional controls would still be required, including:
+
+- Least-privilege tool access
+- Transaction and spending limits
+- Strong authentication and authorization
+- Additional confirmation for sensitive actions
+- Human approval for high-impact operations
+- Detailed tool-call audit logging
+- Monitoring for abnormal agent behavior
+- Protection against prompt injection and other AI-specific attacks
+- Independent security controls around connected services
+
+Therefore, deterministic authorization is one layer of defense rather than a complete replacement for defense-in-depth security.
+
+---
+
+## Evidence
+
+Supporting evidence from the assessment is available in the repository.
+
+The evidence includes before/after screenshots and validation results demonstrating the security testing performed during the assessment.
+
+The complete evidence and demonstration are also documented in the technical assessment report.
+
+---
+
+## Technical Write-up
+
+The complete technical assessment report is included with the submission.
+
+The report contains the vulnerability analysis, exploitation steps, remediation, before/after evidence, screenshots, and validation results.
+
+---
+
+## Demo Video
+
+**3-Minute Screen Recording:**  
+[https://drive.google.com/file/d/1KAAqTJ8lIwTWOSQazY68yg039MCa-H87/view?usp=sharing]
+
+The demonstration covers:
+
+1. Vulnerable behavior
+2. Attack execution
+3. Security fix
+4. Re-testing
+5. Validation result
+6. Security limitation
+7. AI-assisted workflow
+
+---
+
+## AI Usage
+
+AI tools, including ChatGPT, were used as a supporting learning and analysis assistant during the assessment.
+
+AI assistance was used for:
+
+- Understanding unfamiliar AI security concepts
+- Interpreting Eiger lab behavior
+- Exploring attack and mitigation approaches
+- Troubleshooting implementation issues
+- Interpreting validation and tool output
+- Structuring technical documentation
+
+The final implementation and security behavior were independently tested and verified using the Eiger validation mechanism.
+
+---
+
+## Responsible Use
+
+All security testing documented in this repository was performed within the authorized Eiger AI Security Lab environment provided for this technical assessment.
+
+No unauthorized external systems were targeted.
+
+The Eiger environment is intentionally vulnerable and is intended for security training and assessment purposes only.
+
+---
 ## ⚠️ Read this before you run it
 
 **Eiger is deliberately vulnerable software. It exists to be attacked. It is not a product, and it is not safe to deploy.**
